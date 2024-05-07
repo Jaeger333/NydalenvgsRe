@@ -1,0 +1,41 @@
+CREATE TABLE role (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    firstname VARCHAR(50),
+    lastname VARCHAR(50),
+    password VARCHAR(50) NOT NULL,
+    addressId INTEGER,
+    roleId INTEGER NOT NULL,
+    pcId INTEGER,
+    permissionId INTEGER,
+    mobile VARCHAR(12),
+    FOREIGN KEY (addressId) REFERENCES address(id),
+    FOREIGN KEY (roleId) REFERENCES role(id),
+    FOREIGN KEY (pcId) REFERENCES computer(id),
+    FOREIGN KEY (permissionId) REFERENCES permission(id)
+);
+
+CREATE TABLE address (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    street VARCHAR(50),
+    city VARCHAR(50),
+    zip_code INTEGER,
+    country VARCHAR(50)
+);
+
+CREATE TABLE computer (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name VARCHAR(50) UNIQUE NOT NULL,
+    built INTEGER NOT NULL,
+    model VARCHAR(50)
+);
+
+CREATE TABLE permission (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name VARCHAR(50) UNIQUE NOT NULL
+);

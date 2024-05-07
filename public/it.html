@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT</title>
+</head>
+<body>
+    <h1>IT</h1>
+
+    <div id="usersPcs"></div>
+
+    <table id="usersPcsTable">
+        <thead id="usersPcsthead">
+            <tr>
+                <th colspan="5">
+                    <form id="editFormUsersPcs" action='/updateUsersPcs' method="POST">
+                        <input type="hidden" name="userID">
+                        <input type="text" name="firstname" placeholder="First Name" readonly>
+                        <input type="text" name="lastname" placeholder="Last Name" readonly>
+                        <input type="text" name="username" placeholder="Username" readonly>
+                        <select name="pc"></select>
+                        <select name="role"></select>
+                        <button type="submit">Save</button>
+                    </form>
+                </th>
+            </tr>
+            <tr>
+                <th>Fornavn</th>
+                <th>Etternavn</th>
+                <th>Brukernavn</th>
+                <th>Rolle</th>
+                <th>Datamaskin</th>
+            </tr>
+        </thead>
+        <tbody id="usersPcstbody"></tbody>
+    </table>
+
+    <form id="logoutForm" action="/logout" method="GET">
+        <button type="submit" id="btnLogout">Logg ut</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>

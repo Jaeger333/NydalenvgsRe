@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+</head>
+<body>
+    <h1>Admin</h1>
+
+    <div id="users"></div>
+
+    <table id="usersTable">
+        <thead id="usersthead">
+            <tr>
+                <th colspan="8">
+                    <form id="editForm" action='/updateUser' method="POST">
+                        <input type="hidden" name="userID">
+                        <input type="text" name="firstname" placeholder="First Name">
+                        <input type="text" name="lastname" placeholder="Last Name">
+                        <input type="text" name="username" placeholder="Username">
+                        <input type="text" name="password" placeholder="Password">
+                        <input type="text" name="address" placeholder="Address">
+                        <input type="text" name="mobile" placeholder="Mobile">
+                        <select name="pc"></select>
+                        <select name="role"></select>
+                        <button type="submit">Save</button>
+                    </form>
+                </th>
+            </tr>
+            <tr>
+                <th>Fornavn</th>
+                <th>Etternavn</th>
+                <th>Brukernavn</th>
+                <th>Adresse</th>
+                <th>Mobile</th>
+                <th>Rolle</th>
+                <th>Datamaskin</th>
+            </tr>
+        </thead>
+        <tbody id="userstbody"></tbody>
+    </table>
+
+    <form id="logoutForm" action="/logout" method="GET">
+        <button type="submit" id="btnLogout">Logg ut</button>
+    </form>
+
+    <script src="admin.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

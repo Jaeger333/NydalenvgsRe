@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lærer</title>
+</head>
+<body>
+
+    <h1>Nydalen vgs.</h1>
+
+    <h2>Elever:</h2>
+    <br>
+
+    <div id="students"></div>
+
+    <table id="students-table">
+        <thead id="studentsthead">
+            <tr>
+                <th>Fornavn</th>
+                <th>Etternavn</th>
+                <th>Brukernavn</th>
+                <th>Adresse</th>
+                <th>Mobile</th>
+            </tr>
+        </thead>
+        <tbody id="studentstbody"></tbody>
+    </table>
+
+    <br>
+
+    <form id="logoutForm" action="/logout" method="GET">
+        <button type="submit" id="btnLogout">Logg ut</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
