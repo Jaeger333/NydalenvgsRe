@@ -33,6 +33,9 @@ async function login(evt) {
                 } else if (user.role === "Elev") {
                     alert("Elever kan ikke logge inn her.")
                     console.log("Student logged in")
+                } else if (user.role === "Inactive") {
+                    alert("Brukeren din er ikke aktivert, kontakt administrator.")
+                    console.log("Student logged in")
                 } else if (user.role === "IT-medarbeider") {
                     window.location.href = '/it.html'
                     console.log("IT-medarbeider logged in")

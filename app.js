@@ -99,7 +99,16 @@ app.post('/register', checkLoggedIn, checkIsAdmin, (req, res) => {
     console.log("registerUser", req.body);
     const reguser = req.body;
     reguser.username = createUsername(reguser.firstname, reguser.lastname)
-    const user = addUser(reguser.username, reguser.firstname, reguser.lastname, reguser.password, reguser.address, reguser.role, reguser.pc, reguser.permission, reguser.mobile)
+    const user = addUser(reguser.username, reguser.firstname, reguser.lastname, reguser.password, 1, 1, 1, 1, reguser.mobile)
+    // Redirect to user list or confirmation page after adding user
+    res.redirect('/');
+});
+
+app.post('/selfRegister', (req, res) => {
+    console.log("selfRegisterUser", req.body);
+    const reguser = req.body;
+    reguser.username = createUsername(reguser.firstname, reguser.lastname)
+    const user = selfAddUser(reguser.username, reguser.firstname, reguser.lastname, reguser.password, reguser.mobile)
     // Redirect to user list or confirmation page after adding user
     res.redirect('/');
 });
@@ -142,14 +151,30 @@ function updateUserPcDB(id, pc) {
 }
 
 
-function addUser(username, firstname, lastname, password, address, roleId, pcId, permissionId, mobile) {
+function addUser(username, firstname, lastname, password, addressId, roleId, pcId, permissionId, mobile) {
     //Denne funksjonen må endres slik at man hasher passordet før man lagrer til databasen
     //rolle skal heller ikke være hardkodet.
     const saltRounds = 10
     const hash = bcrypt.hashSync(password, saltRounds)
-    let sql = db.prepare("INSERT INTO user (username, firstname, lastname, password, address, roleId, pcId, permissionId, mobile) " + 
+    let sql = db.prepare("INSERT INTO user (username, firstname, lastname, password, addressId, roleId, pcId, permissionId, mobile) " + 
                          " values (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-    const info = sql.run(username, firstname, lastname, hash, address, roleId, pcId, permissionId, mobile)
+    const info = sql.run(username, firstname, lastname, hash, addressId, roleId, pcId, permissionId, mobile)
+    
+    //sql=db.prepare('select user.id as userid, username, task.id as taskid, timedone, task.name as task, task.points from done inner join task on done.idtask = task.id where iduser = ?)')
+    sql = db.prepare('SELECT user.id as userId, user.username, role.name AS role FROM user INNER JOIN role on user.roleId = role.id WHERE user.id  = ?');
+    let rows = sql.all(info.lastInsertRowid)  
+
+    return rows[0]
+}
+
+function selfAddUser(username, firstname, lastname, password, mobile) {
+    //Denne funksjonen må endres slik at man hasher passordet før man lagrer til databasen
+    //rolle skal heller ikke være hardkodet.
+    const saltRounds = 10
+    const hash = bcrypt.hashSync(password, saltRounds)
+    let sql = db.prepare("INSERT INTO user (username, firstname, lastname, password, roleId, mobile) " + 
+                         " values (?, ?, ?, ?, ?, ?)")
+    const info = sql.run(username, firstname, lastname, hash, 6, mobile)
     
     //sql=db.prepare('select user.id as userid, username, task.id as taskid, timedone, task.name as task, task.points from done inner join task on done.idtask = task.id where iduser = ?)')
     sql = db.prepare('SELECT user.id as userId, user.username, role.name AS role FROM user INNER JOIN role on user.roleId = role.id WHERE user.id  = ?');

@@ -3,6 +3,7 @@ INSERT INTO role (name) VALUES ('Lærer');
 INSERT INTO role (name) VALUES ('Elev');
 INSERT INTO role (name) VALUES ('Miljøfagarbeider');
 INSERT INTO role (name) VALUES ('IT-medarbeider');
+INSERT INTO role (name) VALUES ('Inactive');
 
 INSERT INTO computer (name, built, model) VALUES ('PC1', 2019, 'HP EliteDesk 800 G5');
 INSERT INTO computer (name, built, model) VALUES ('PC2', 2020, 'Lenovo ThinkPad E14');
@@ -23,3 +24,6 @@ INSERT INTO user (username, firstname, lastname, password, addressId, roleId, pc
 VALUES ('ITtest', 'ITtest', 'ITtest', 'ITtest', 1, 5, 1, '12345678');
 INSERT INTO user (username, firstname, lastname, password, addressId, roleId, pcId, mobile)
 VALUES ('test2', 'test2', 'test2', 'password123', 1, 4, 1, '12345678');
+
+INSERT INTO user (username, firstname, lastname, password, addressId, roleId, pcId, mobile)
+VALUES ('20Test', 'test20', 'test20', 'password123', 1, 3, 1, '12345678');
